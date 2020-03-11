@@ -55,3 +55,12 @@ com1.config()
 com2.config()
 # In above line com1 gets passed as a parameter to self automatically
 '''
+
+'''
+Also called “formatted string literals,” f-strings are string literals that have an f at the beginning and curly braces containing expressions that will be replaced with their values.
+The expressions are evaluated at runtime and then formatted using the __format__ protocol.
+name = "Eric"
+age = 74
+f"Hello, {name}. You are {age}."
+'Hello, Eric. You are 74.'
+'''
