@@ -1,75 +1,33 @@
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 
+posts = [
+    {
+        'author': 'Subham Agrawal',
+        'title': 'Blog Post 1',
+        'content': 'First Post content',
+        'date_posted': 'March 11,2020'
+    },
+    {
+        'author': 'Ravi Bhadoria',
+        'title': 'Blog Post 2',
+        'content': 'Second Post content',
+        'date_posted': 'March 12,2020'
+    }
+]
 
 # decorator creates an association between the URL given as an argument and the function
 @app.route("/")
 @app.route("/home")
 def home():
-    return "<h1>Home Page</h1>"
+    # The first posts is the variable to be used in some other file and second posts is the dummy data defined above
+    return render_template('home.html', posts=posts)
 
 
 @app.route("/about")
 def about():
-    return "<h1>About Page</h1>"
+    return render_template('about.html', title='About')
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-'''
-DECORAOTRS
-def div(a, b):
-    print(a/b)
-
-
-def smart_div(func):
-
-    def inner(a, b):
-        if a < b:
-            a, b = b, a
-        return func(a, b)
-
-    return inner
-
-
-div1 = smart_div(div)
-div1(2, 4)
-'''
-
-'''
-__name__ is a special variable only used to denote the name of module
-When the file is currently run __name__ is __main__
-However if it is imported in some other file and then that file is imported as module, __name__ is the module name
-It can be used to check if it is the first file that is being currently executed - 
-if __name__ == "__main__":
-    main()
-'''
-
-'''
-Classes and Objects
-Classes are blueprints for Objects
-Objects have Attributes(variables) and Behaviour(methods[functions])
-
-class Computer:
-
-    def __init__(self, cpu, ram):
-        self.cpu = cpu
-        self.ram = ram
-
-    def config(self):
-        print("Config is ", self.cpu, self.ram)
-
-com1 = Computer("i5", 16)
-com2 = Computer("Ryzen", 8)
-# __init__ function called by default at the time of Object Creation
-# com1 passed as paramter also automatically
-
-Computer.config(com1)
-Computer.config(com2)
-
-OR
-
-com1.config()
-com2.config()
-# In above line com1 gets passed as a parameter to self automatically
-'''
