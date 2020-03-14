@@ -131,3 +131,27 @@ User('Subham','subham@demo.com','default.jpg')
 >>> db.drop_all() #This was used to delete all table and all rows
 >>> db.create_all() #This would have created the table structure as original
 '''
+
+'''
+So why does it fail and give ImportError on User import if you are NOT putting the line "from models import User, Post" below "db = SQLAlchemy(app)??
+So here there is problem of Circular Imports
+So it sees flaskblog file and import User from models module
+NOTE: ANYTIME PYTHON IMPORTS SOMETHING FROM MODULE, IT STILL RUNS THE ENTIRE MODULE!!!
+So when it tries to run the entire models module, then it tries to perform its imports, so it then it goes to that line which says from flaskblog import db
+but db variable has still not been declared, so it should fail on the db import but it doesn't do that it fails on the User import
+So what's happening here is when we are running the script from command line using Python, Python calls the name of the script __main__ which we have specified at the bottom.
+So now it goes and runs, encounters from models... statement and then in models file it encounter from flaskblog, but PYTHON HASN'T SEEN FLASKBLOG STILL AS IT HAS NAMED IT __main__.
+So it runs the flaskblog for a 2nd time from the beginning, so it comes and redoes all of the stuff, thus it says that I have seen the models module but I don't know what the User class is bcoz it is below in the models module.
+
+
+So the above problem could be fixed by putting the line "from models import User, Post" below "db = SQLAlchemy(app)"
+But this does not allow the creation of database using db.create_all()
+
+So the universal solution to this is to set up our code such that we are not running flaskblog directly.
+To do this we need to convert our application into package, which can be done by creating a __init__ file.
+
+The __init__ file is where we will initialize our application and bring together different components.
+
+When you are working with packages, that is going to import from __init__.py file within that package, so that app VARIABLE MUST HAVE TO EXIST WITHIN THE __init__.py file 
+When importing use package_name.module_name for importing from specific modules
+'''
