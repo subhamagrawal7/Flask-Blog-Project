@@ -178,3 +178,10 @@ False
 >>> bcrypt.check_password_hash(hashed_pw, 'testing')
 True
 '''
+
+'''
+How validate_username() and validate_email() are being called, these functions are called with the FlaskForm class that our RegistrationForm class inherited from. 
+If you look at the definition for validate_on_submit(), and from there, the definition for validate(), that validate function contains the following line:
+inline = getattr(self.__class__, 'validate_%s' % name, None)
+There is a lot going on in the background, but from what I can tell, Flask is checking for extra functions created with the naming pattern: "validate_(field name)", and later calling those extra functions.
+'''
