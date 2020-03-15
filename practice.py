@@ -155,3 +155,26 @@ The __init__ file is where we will initialize our application and bring together
 When you are working with packages, that is going to import from __init__.py file within that package, so that app VARIABLE MUST HAVE TO EXIST WITHIN THE __init__.py file 
 When importing use package_name.module_name for importing from specific modules
 '''
+
+'''
+For Hashing passwords a package called flask-bcrypt is used
+>>> from flask_bcrypt import Bcrypt
+>>> bcrypt = Bcrypt()
+>>> bcrypt.generate_password_hash('testing')
+b'$2b$12$Qd6aS30Lz6oToARXtTAUg.Y0cWJ6Qmfyhw9ujK4QTrivZTouG7/5m'
+
+#Everytime decoding gives a different hash value
+>>> bcrypt.generate_password_hash('testing').decode('utf-8')
+'$2b$12$eK5drSUeTyz2LaEU1avkiuaSVJXULqF/wRVDQ380o/B0YudQnSo1W'
+>>> bcrypt.generate_password_hash('testing').decode('utf-8')
+'$2b$12$Kdni//ilJcVfJMkJIgT.wOzfHFdcCa31uxS07EiLe9IfPeUipgu8.'
+>>> bcrypt.generate_password_hash('testing').decode('utf-8')
+'$2b$12$du1CuqprEVQX4/lfJlLfPuravXwbfJ6TGVx0OvAA3ClLuJmPDdPSW'
+
+#Thus passwords are checked using check_password_hash() method
+>>> hashed_pw = bcrypt.generate_password_hash('testing').decode('utf-8')
+>>> bcrypt.check_password_hash(hashed_pw, 'password')
+False
+>>> bcrypt.check_password_hash(hashed_pw, 'testing')
+True
+'''
