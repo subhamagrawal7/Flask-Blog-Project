@@ -185,3 +185,9 @@ If you look at the definition for validate_on_submit(), and from there, the defi
 inline = getattr(self.__class__, 'validate_%s' % name, None)
 There is a lot going on in the background, but from what I can tell, Flask is checking for extra functions created with the naming pattern: "validate_(field name)", and later calling those extra functions.
 '''
+
+'''
+So why does a message like "Confirm Resubmission" pop up in your browser??
+Because your browser is telling that you are about to run another POST request when you reload your page,
+so us redirecting causes the browser to send a GET request and then we don't get that
+'''
