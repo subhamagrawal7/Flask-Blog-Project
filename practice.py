@@ -191,3 +191,7 @@ So why does a message like "Confirm Resubmission" pop up in your browser??
 Because your browser is telling that you are about to run another POST request when you reload your page,
 so us redirecting causes the browser to send a GET request and then we don't get that
 '''
+
+'''
+If you just want to throw away a variable in Python then use the _ as a variable
+'''
